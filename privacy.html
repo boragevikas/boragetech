@@ -1,101 +1,310 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - BorageTech</title>
+    <meta name="description" content="Privacy Policy for BorageTech and Divvy application.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: { sans: ['Inter', 'sans-serif'] },
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6', // Borage Blue
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        },
+                        accent: '#10b981', // Mint Green (Divvy Color)
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h2 { color: #2980b9; margin-top: 30px; }
-        h3 { color: #16a085; }
-        p { margin-bottom: 15px; }
-        ul { margin-bottom: 15px; }
-        .footer { margin-top: 50px; font-size: 0.9em; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 20px; }
-        .contact-box { background: #f9f9f9; padding: 15px; border-left: 4px solid #2980b9; margin: 20px 0; }
-        a { color: #2980b9; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #3b82f6 0%, transparent 40%), radial-gradient(circle at bottom left, #10b981 0%, transparent 40%);
+        }
     </style>
 </head>
-<body>
 
-    <h1>Privacy Policy</h1>
-    <p><strong>Last Updated:</strong> February 08, 2026</p>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300" x-data="{ 
+          darkMode: localStorage.getItem('mode') === 'dark', 
+          mobileMenu: false,
+          fromSite: false,
+          toggle() {
+              this.darkMode = !this.darkMode;
+              localStorage.setItem('mode', this.darkMode ? 'dark' : 'light');
+              if (this.darkMode) {
+                  document.documentElement.classList.add('dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+              }
+          }
+      }" x-init="
+          if (darkMode) document.documentElement.classList.add('dark');
+          if (document.referrer && document.referrer.includes(window.location.hostname)) {
+              fromSite = true;
+          }
+      ">
 
-    <p>Welcome to <strong>Divvy</strong>, a mobile application developed by <strong>BorageTech</strong> ("we," "us," or "our"). We are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.</p>
-    
-    <p>This Privacy Policy explains how we collect, use, and protect your information when you use our mobile application (the "App"). By using the App, you agree to the collection and use of information in accordance with this policy.</p>
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full z-50 backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a x-show="fromSite" href="javascript:history.back()"
+                    class="p-2 -ml-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 hover:text-brand-600 transition-colors px-3 group flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="text-sm font-medium">Back</span>
+                </a>
 
-    <h2>1. Information We Collect</h2>
-    <p>To provide you with the full functionality of Divvy (such as expense splitting, group management, and settlement reminders), we collect the following types of information:</p>
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent rounded-xl flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/50 transition-all">
+                        <i class="fas fa-layer-group text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">Borage<span
+                            class="text-brand-600 dark:text-brand-400">Tech</span></span>
+                </a>
+            </div>
 
-    <h3>A. Personal Information</h3>
-    <ul>
-        <li><strong>Phone Number:</strong> Required to create your unique user identity and allow friends to add you to groups.</li>
-        <li><strong>Name:</strong> Used to display your identity to other group members.</li>
-        <li><strong>Email Address:</strong> Used for account authentication, recovery, and support communication.</li>
-    </ul>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#products" class="text-sm font-medium hover:text-brand-600 transition-colors">Our
+                    Apps</a>
+                <a href="index.html#about"
+                    class="text-sm font-medium hover:text-brand-600 transition-colors">Mission</a>
+                <a href="mailto:support@boragetech.in"
+                    class="text-sm font-medium hover:text-brand-600 transition-colors">Contact</a>
 
-    <h3>B. Financial & Transaction Data</h3>
-    <ul>
-        <li><strong>Expense Details:</strong> We store data about the expenses you add (e.g., description, amount, date, currency) to calculate splits and balances.</li>
-        <li><strong>Settlement Information:</strong> We track who owes whom to provide accurate debt simplification.</li>
-        <li><strong>Note:</strong> We do <strong>NOT</strong> store your bank account numbers, UPI PINs, or credit card details. All actual payments are handled externally via third-party apps (e.g., WhatsApp, UPI apps).</li>
-    </ul>
+                <button @click="toggle()"
+                    class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i x-show="!darkMode" class="fas fa-moon text-slate-600"></i>
+                    <i x-show="darkMode" x-cloak class="fas fa-sun text-yellow-400"></i>
+                </button>
+            </div>
 
-    <h3>C. Device & Usage Data</h3>
-    <ul>
-        <li><strong>Contacts (Optional):</strong> With your explicit permission, we access your contacts to help you easily add friends to groups. We do not upload your entire contact list to our servers; we only process the contacts you select.</li>
-        <li><strong>App Performance:</strong> We may collect anonymous crash reports and performance logs (via Google Firebase) to improve App stability.</li>
-    </ul>
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
 
-    <h2>2. How We Use Your Information</h2>
-    <p>We use the collected data for the following specific purposes:</p>
-    <ul>
-        <li><strong>Core Functionality:</strong> To calculate debts, manage groups, and synchronize data across your devices.</li>
-        <li><strong>User Authentication:</strong> To verify your identity and secure your account.</li>
-        <li><strong>Communication:</strong> To send you important updates regarding your account or support responses.</li>
-        <li><strong>Improvements:</strong> To analyze usage patterns and fix bugs.</li>
-    </ul>
+        <div x-show="mobileMenu" x-collapse
+            class="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-4 space-y-4 shadow-xl">
+            <a href="index.html#products" class="block text-sm font-medium">Our Apps</a>
+            <a href="index.html#about" class="block text-sm font-medium">Mission</a>
+            <a href="mailto:support@boragetech.in" class="block text-sm font-medium">Contact</a>
+        </div>
+    </nav>
 
-    <h2>3. Data Storage and Security</h2>
-    <p>Your data is stored securely using <strong>Google Firebase</strong> (a Google Cloud Platform service). We implement industry-standard security measures, including:</p>
-    <ul>
-        <li><strong>Encryption:</strong> Data is encrypted in transit (using HTTPS/SSL) and at rest.</li>
-        <li><strong>Access Control:</strong> Strict access controls ensure that only authorized systems can process your data.</li>
-    </ul>
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 hero-gradient opacity-5 dark:opacity-10 pointer-events-none fixed"></div>
 
-    <h2>4. Third-Party Services</h2>
-    <p>We may share strictly necessary data with the following third-party services to operate the App:</p>
-    <ul>
-        <li><strong>Google Firebase:</strong> For authentication, database hosting, and analytics.</li>
-        <li><strong>WhatsApp (User Initiated):</strong> If you use the "Send Reminder" feature, the App will open WhatsApp on your device with a pre-filled message. We do not access your WhatsApp messages.</li>
-    </ul>
+        <article
+            class="max-w-3xl mx-auto bg-white dark:bg-slate-800/50 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl relative z-10">
 
-    <h2>5. Your Rights</h2>
-    <p>You have the right to:</p>
-    <ul>
-        <li><strong>Access:</strong> Request a copy of the data we hold about you.</li>
-        <li><strong>Correction:</strong> Update your profile information within the App settings.</li>
-        <li><strong>Deletion:</strong> Request the deletion of your account and all associated data by contacting us at support@boragetech.in.</li>
-    </ul>
+            <header class="mb-12 border-b border-slate-200 dark:border-slate-700 pb-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">Privacy Policy</h1>
+                <p class="text-slate-500 font-medium">Last Updated: <span
+                        class="text-brand-600 dark:text-brand-400">February 08, 2026</span></p>
+            </header>
 
-    <h2>6. Children's Privacy</h2>
-    <p>Our App is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+            <div class="prose prose-slate dark:prose-invert max-w-none">
+                <p class="text-lg text-slate-600 dark:text-slate-300 mb-6">
+                    Welcome to <strong>Divvy</strong>, a mobile application developed by <strong
+                        class="text-brand-600 dark:text-brand-400">BorageTech</strong> ("we," "us," or "our"). We are
+                    committed to protecting your privacy and ensuring your personal information is handled in a safe and
+                    responsible manner.
+                </p>
 
-    <h2>7. Changes to This Privacy Policy</h2>
-    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">
+                    This Privacy Policy explains how we collect, use, and protect your information when you use our
+                    mobile application (the "App"). By using the App, you agree to the collection and use of information
+                    in accordance with this policy.
+                </p>
 
-    <div class="contact-box">
-        <h2>8. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us:</p>
-        <p><strong>Email:</strong> <a href="mailto:support@boragetech.in">support@boragetech.in</a><br>
-        <strong>Website:</strong> <a href="https://boragetech.in">www.boragetech.in</a></p>
-    </div>
+                <h2 class="text-2xl font-bold mb-4 mt-8 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">1</span>
+                    Information We Collect
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">To provide you with the full functionality of Divvy
+                    (such as expense splitting, group management, and settlement reminders), we collect the following
+                    types of information:</p>
 
-    <div class="footer">
-        &copy; 2026 BorageTech. All rights reserved.
-    </div>
+                <h3 class="text-xl font-semibold mb-3 text-slate-800 dark:text-white mt-6">A. Personal Information</h3>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-6">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Phone Number:</strong> Required to create
+                        your unique user identity and allow friends to add you to groups.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Name:</strong> Used to display your identity
+                        to other group members.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Email Address:</strong> Used for account
+                        authentication, recovery, and support communication.</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-3 text-slate-800 dark:text-white">B. Financial & Transaction Data
+                </h3>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-6">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Expense Details:</strong> We store data about
+                        the expenses you add (e.g., description, amount, date, currency) to calculate splits and
+                        balances.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Settlement Information:</strong> We track who
+                        owes whom to provide accurate debt simplification.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Note:</strong> We do <strong
+                            class="text-red-500">NOT</strong> store your bank account numbers, UPI PINs, or credit card
+                        details. All actual payments are handled externally via third-party apps (e.g., WhatsApp, UPI
+                        apps).</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-3 text-slate-800 dark:text-white">C. Device & Usage Data</h3>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-8">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Contacts (Optional):</strong> With your
+                        explicit permission, we access your contacts to help you easily add friends to groups. We do not
+                        upload your entire contact list to our servers; we only process the contacts you select.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">App Performance:</strong> We may collect
+                        anonymous crash reports and performance logs (via Google Firebase) to improve App stability.
+                    </li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mb-4 mt-12 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">2</span>
+                    How We Use Your Information
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">We use the collected data for the following specific
+                    purposes:</p>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-8">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Core Functionality:</strong> To calculate
+                        debts, manage groups, and synchronize data across your devices.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">User Authentication:</strong> To verify your
+                        identity and secure your account.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Communication:</strong> To send you important
+                        updates regarding your account or support responses.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Improvements:</strong> To analyze usage
+                        patterns and fix bugs.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mb-4 mt-12 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">3</span>
+                    Data Storage and Security
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">Your data is stored securely using <strong
+                        class="text-slate-900 dark:text-slate-200">Google Firebase</strong> (a Google Cloud Platform
+                    service). We implement industry-standard security measures, including:</p>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-8">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Encryption:</strong> Data is encrypted in
+                        transit (using HTTPS/SSL) and at rest.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Access Control:</strong> Strict access
+                        controls ensure that only authorized systems can process your data.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mb-4 mt-12 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">4</span>
+                    Third-Party Services
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">We may share strictly necessary data with the
+                    following third-party services to operate the App:</p>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-8">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Google Firebase:</strong> For authentication,
+                        database hosting, and analytics.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">WhatsApp (User Initiated):</strong> If you
+                        use the "Send Reminder" feature, the App will open WhatsApp on your device with a pre-filled
+                        message. We do not access your WhatsApp messages.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mb-4 mt-12 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">5</span>
+                    Your Rights
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">You have the right to:</p>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400 mb-8">
+                    <li><strong class="text-slate-900 dark:text-slate-200">Access:</strong> Request a copy of the data
+                        we hold about you.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Correction:</strong> Update your profile
+                        information within the App settings.</li>
+                    <li><strong class="text-slate-900 dark:text-slate-200">Deletion:</strong> Request the deletion of
+                        your account and all associated data by contacting us at support@boragetech.in.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mb-4 mt-12 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">6</span>
+                    Children's Privacy
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">Our App is not intended for use by children under the
+                    age of 13. We do not knowingly collect personal information from children under 13.</p>
+
+                <h2 class="text-2xl font-bold mb-4 mt-12 flex items-center">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center text-sm mr-3">7</span>
+                    Changes to This Privacy Policy
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">We may update our Privacy Policy from time to time.
+                    We will notify you of any changes by posting the new Privacy Policy on this page and updating the
+                    "Last Updated" date.</p>
+
+                <div
+                    class="mt-12 bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-envelope text-brand-600 mr-3"></i>
+                        Contact Us
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 mb-4">If you have any questions about this Privacy
+                        Policy, please contact us:</p>
+                    <div class="space-y-2">
+                        <p><strong class="text-slate-900 dark:text-slate-200">Email:</strong> <a
+                                href="mailto:support@boragetech.in"
+                                class="text-brand-600 hover:underline">support@boragetech.in</a></p>
+                        <p><strong class="text-slate-900 dark:text-slate-200">Website:</strong> <a
+                                href="https://boragetech.in"
+                                class="text-brand-600 hover:underline">www.boragetech.in</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 py-16 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0">
+                <span class="text-xl font-bold tracking-tight">Borage<span class="text-brand-600">Tech</span></span>
+                <p class="text-sm text-slate-500 mt-2">© 2026 BorageTech. All rights reserved.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <a href="privacy.html" class="hover:text-brand-600 transition-colors text-brand-600">Privacy Policy</a>
+                <a href="#" class="hover:text-brand-600 transition-colors">Terms of Service</a>
+                <a href="mailto:support@boragetech.in" class="hover:text-brand-600 transition-colors">Support</a>
+                <a href="#" class="hover:text-brand-600 transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-brand-600 transition-colors"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
 
 </body>
+
 </html>

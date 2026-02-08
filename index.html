@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BorageTech | Smart Tools, Simple Life</title>
-    <meta name="description" content="BorageTech builds simple, privacy-focused software tools to solve everyday problems. Creators of Divvy.">
-    
+    <meta name="description"
+        content="BorageTech builds simple, privacy-focused software tools to solve everyday problems. Creators of Divvy.">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <script>
@@ -35,27 +37,50 @@
         }
     </script>
     <style>
-        [x-cloak] { display: none !important; }
-        .hero-gradient { background: radial-gradient(circle at top right, #3b82f6 0%, transparent 40%), radial-gradient(circle at bottom left, #10b981 0%, transparent 40%); }
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #3b82f6 0%, transparent 40%), radial-gradient(circle at bottom left, #10b981 0%, transparent 40%);
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300" x-data="{ darkMode: false, mobileMenu: false }">
 
-    <nav class="fixed w-full z-50 backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300" x-data="{ 
+          darkMode: localStorage.getItem('mode') === 'dark', 
+          mobileMenu: false,
+          toggle() {
+              this.darkMode = !this.darkMode;
+              localStorage.setItem('mode', this.darkMode ? 'dark' : 'light');
+              if (this.darkMode) {
+                  document.documentElement.classList.add('dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+              }
+          }
+      }" x-init="if (darkMode) document.documentElement.classList.add('dark');">
+
+    <nav
+        class="fixed w-full z-50 backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent rounded-xl flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/50 transition-all">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent rounded-xl flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/50 transition-all">
                     <i class="fas fa-layer-group text-lg"></i>
                 </div>
-                <span class="text-xl font-bold tracking-tight">Borage<span class="text-brand-600 dark:text-brand-400">Tech</span></span>
+                <span class="text-xl font-bold tracking-tight">Borage<span
+                        class="text-brand-600 dark:text-brand-400">Tech</span></span>
             </a>
 
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#products" class="text-sm font-medium hover:text-brand-600 transition-colors">Our Apps</a>
                 <a href="#about" class="text-sm font-medium hover:text-brand-600 transition-colors">Mission</a>
-                <a href="mailto:support@boragetech.in" class="text-sm font-medium hover:text-brand-600 transition-colors">Contact</a>
-                
-                <button @click="darkMode = !darkMode; document.documentElement.classList.toggle('dark')" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                <a href="mailto:support@boragetech.in"
+                    class="text-sm font-medium hover:text-brand-600 transition-colors">Contact</a>
+
+                <button @click="toggle()"
+                    class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
                     <i x-show="!darkMode" class="fas fa-moon text-slate-600"></i>
                     <i x-show="darkMode" x-cloak class="fas fa-sun text-yellow-400"></i>
                 </button>
@@ -66,7 +91,8 @@
             </button>
         </div>
 
-        <div x-show="mobileMenu" x-collapse class="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-4 space-y-4 shadow-xl">
+        <div x-show="mobileMenu" x-collapse
+            class="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-4 space-y-4 shadow-xl">
             <a href="#products" class="block text-sm font-medium">Our Apps</a>
             <a href="#about" class="block text-sm font-medium">Mission</a>
             <a href="mailto:support@boragetech.in" class="block text-sm font-medium">Contact</a>
@@ -75,26 +101,31 @@
 
     <header class="relative pt-40 pb-20 px-6 overflow-hidden">
         <div class="absolute inset-0 hero-gradient opacity-10 dark:opacity-20 pointer-events-none"></div>
-        
+
         <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center space-x-2 bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8 border border-brand-100 dark:border-brand-800">
+            <div
+                class="inline-flex items-center space-x-2 bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8 border border-brand-100 dark:border-brand-800">
                 <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
                 <span>Divvy is now available</span>
             </div>
-            
+
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
-                Building <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent">Digital Courage.</span>
+                Building <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent">Digital
+                    Courage.</span>
             </h1>
-            
+
             <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                We create simple, privacy-focused software that solves the awkward, complex, and boring problems of everyday life.
+                We create simple, privacy-focused software that solves the awkward, complex, and boring problems of
+                everyday life.
             </p>
-            
+
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#products" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold hover:transform hover:scale-105 transition-all shadow-xl">
+                <a href="#products"
+                    class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold hover:transform hover:scale-105 transition-all shadow-xl">
                     Explore Products
                 </a>
-                <a href="#about" class="px-8 py-4 rounded-xl font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <a href="#about"
+                    class="px-8 py-4 rounded-xl font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                     Our Vision
                 </a>
             </div>
@@ -109,18 +140,22 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="group relative bg-slate-50 dark:bg-slate-800 rounded-3xl p-1 border border-slate-200 dark:border-slate-700 hover:border-brand-500 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/10">
-                    <div class="absolute top-6 right-6 bg-accent/10 text-accent text-xs font-bold px-3 py-1 rounded-full border border-accent/20">
+
+                <div
+                    class="group relative bg-slate-50 dark:bg-slate-800 rounded-3xl p-1 border border-slate-200 dark:border-slate-700 hover:border-brand-500 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/10">
+                    <div
+                        class="absolute top-6 right-6 bg-accent/10 text-accent text-xs font-bold px-3 py-1 rounded-full border border-accent/20">
                         LIVE
                     </div>
                     <div class="p-8 h-full flex flex-col">
-                        <div class="w-14 h-14 bg-white dark:bg-slate-700 rounded-2xl flex items-center justify-center text-2xl text-brand-600 mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <div
+                            class="w-14 h-14 bg-white dark:bg-slate-700 rounded-2xl flex items-center justify-center text-2xl text-brand-600 mb-6 shadow-sm group-hover:scale-110 transition-transform">
                             <i class="fas fa-wallet"></i>
                         </div>
                         <h3 class="text-2xl font-bold mb-2">Divvy</h3>
-                        <p class="text-slate-500 mb-6 flex-grow">The fairest way to split bills. Track shared expenses, manage group debts, and settle up via WhatsApp without the awkward conversations.</p>
-                        
+                        <p class="text-slate-500 mb-6 flex-grow">The fairest way to split bills. Track shared expenses,
+                            manage group debts, and settle up via WhatsApp without the awkward conversations.</p>
+
                         <div class="space-y-3">
                             <div class="flex items-center text-sm text-slate-500">
                                 <i class="fas fa-check text-accent mr-2"></i> Unlimited Expenses
@@ -130,32 +165,44 @@
                             </div>
                         </div>
 
-                        <a href="#" class="mt-8 block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-semibold hover:bg-brand-700 transition-colors">
+                        <a href="#"
+                            class="mt-8 block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-semibold hover:bg-brand-700 transition-colors">
                             Download Now
                         </a>
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 opacity-60 relative overflow-hidden">
-                    <div class="absolute inset-0 flex items-center justify-center bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-[2px] z-10">
-                        <span class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider">In Development</span>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 opacity-60 relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 flex items-center justify-center bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-[2px] z-10">
+                        <span
+                            class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider">In
+                            Development</span>
                     </div>
-                    <div class="w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-2xl text-slate-400 mb-6">
+                    <div
+                        class="w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-2xl text-slate-400 mb-6">
                         <i class="fas fa-clipboard-check"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">TaskFlow</h3>
-                    <p class="text-slate-500">A minimalist project management tool for solo founders and small teams.</p>
+                    <p class="text-slate-500">A minimalist project management tool for solo founders and small teams.
+                    </p>
                 </div>
 
-                 <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 opacity-60 relative overflow-hidden">
-                    <div class="absolute inset-0 flex items-center justify-center bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-[2px] z-10">
-                        <span class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider">Planned</span>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 opacity-60 relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 flex items-center justify-center bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-[2px] z-10">
+                        <span
+                            class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider">Planned</span>
                     </div>
-                    <div class="w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-2xl text-slate-400 mb-6">
+                    <div
+                        class="w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-2xl text-slate-400 mb-6">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Vault</h3>
-                    <p class="text-slate-500">Secure, local-only password and document storage for the privacy conscious.</p>
+                    <p class="text-slate-500">Secure, local-only password and document storage for the privacy
+                        conscious.</p>
                 </div>
 
             </div>
@@ -166,19 +213,22 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8">Why BorageTech?</h2>
             <p class="text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-12">
-                Technology has become too loud, too expensive, and too invasive. 
-                We believe in <span class="text-brand-600 font-bold">Digital Courage</span>—the idea that software should empower you to take action, 
+                Technology has become too loud, too expensive, and too invasive.
+                We believe in <span class="text-brand-600 font-bold">Digital Courage</span>—the idea that software
+                should empower you to take action,
                 whether that's asking a friend to pay you back or organizing your chaotic life.
             </p>
-            
+
             <div class="grid md:grid-cols-3 gap-8 text-left">
                 <div>
                     <h4 class="font-bold text-lg mb-2">Privacy First</h4>
-                    <p class="text-sm text-slate-500">We don't sell data. We build tools that respect your digital boundaries.</p>
+                    <p class="text-sm text-slate-500">We don't sell data. We build tools that respect your digital
+                        boundaries.</p>
                 </div>
                 <div>
                     <h4 class="font-bold text-lg mb-2">Zero Bloat</h4>
-                    <p class="text-sm text-slate-500">No unnecessary features. Just the exact tool you need to get the job done.</p>
+                    <p class="text-sm text-slate-500">No unnecessary features. Just the exact tool you need to get the
+                        job done.</p>
                 </div>
                 <div>
                     <h4 class="font-bold text-lg mb-2">Built in India</h4>
@@ -194,7 +244,7 @@
                 <span class="text-xl font-bold tracking-tight">Borage<span class="text-brand-600">Tech</span></span>
                 <p class="text-sm text-slate-500 mt-2">© 2026 BorageTech. All rights reserved.</p>
             </div>
-            
+
             <div class="flex flex-wrap justify-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
                 <a href="privacy.html" class="hover:text-brand-600 transition-colors">Privacy Policy</a>
                 <a href="#" class="hover:text-brand-600 transition-colors">Terms of Service</a>
@@ -206,4 +256,5 @@
     </footer>
 
 </body>
+
 </html>
