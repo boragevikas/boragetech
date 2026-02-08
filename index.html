@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ darkMode: true }" :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divvy | Effortless Expense Splitting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        [x-cloak] { display: none !important; }
+        .transition-theme { transition: background-color 0.3s, color 0.3s; }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-up { animation: fade-in-up 0.8s ease-out forwards; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="transition-theme bg-gray-50 text-gray-900 dark:bg-darkBg dark:text-gray-100 font-sans selection:bg-primary selection:text-white">
+
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-white/70 dark:bg-darkBg/70 border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fas fa-divide"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight">Divvy</span>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                    <i x-show="!darkMode" class="fas fa-moon"></i>
+                    <i x-show="darkMode" x-cloak class="fas fa-sun text-yellow-400"></i>
+                </button>
+                <a href="mailto:support@boragetech.in" class="hidden md:block text-sm font-medium hover:text-primary">Support</a>
+                <button class="bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
+                    Download App
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center animate-up">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                Splitting bills, <span class="text-primary">simplified.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
+                Manage group expenses, track debts, and settle up with friends without the awkwardness. Built by BorageTech.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+                <div class="flex items-center space-x-2 bg-black text-white px-6 py-3 rounded-xl cursor-pointer hover:scale-105 transition-transform">
+                    <i class="fab fa-apple text-2xl"></i>
+                    <div class="text-left"><p class="text-[10px] uppercase">Download on</p><p class="text-sm font-bold">App Store</p></div>
+                </div>
+                <div class="flex items-center space-x-2 bg-black text-white px-6 py-3 rounded-xl cursor-pointer hover:scale-105 transition-transform">
+                    <i class="fab fa-google-play text-2xl"></i>
+                    <div class="text-left"><p class="text-[10px] uppercase">Get it on</p><p class="text-sm font-bold">Google Play</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-gray-100 dark:bg-gray-900/50">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="p-8 bg-white dark:bg-darkCard rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 hover:border-primary transition-colors">
+                <i class="fas fa-users text-primary text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Group Management</h3>
+                <p class="text-gray-500">Easily add friends via contacts and create groups for trips, roommates, or dinners.</p>
+            </div>
+            <div class="p-8 bg-white dark:bg-darkCard rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 hover:border-primary transition-colors">
+                <i class="fas fa-bolt text-primary text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Instant Sync</h3>
+                <p class="text-gray-500">Real-time updates across all devices powered by Google Firebase secure infrastructure.</p>
+            </div>
+            <div class="p-8 bg-white dark:bg-darkCard rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 hover:border-primary transition-colors">
+                <i class="fab fa-whatsapp text-primary text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Smart Reminders</h3>
+                <p class="text-gray-500">Send pre-filled settlement reminders via WhatsApp with a single tap.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto bg-white dark:bg-darkCard p-8 md:p-12 rounded-[2rem] shadow-xl border border-gray-100 dark:border-gray-800">
+            <h2 class="text-3xl font-bold mb-2">Privacy Policy</h2>
+            <p class="text-sm text-gray-500 mb-8">Last Updated: February 08, 2026</p>
+            
+            <div class="space-y-8 text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">1. Information We Collect</h3>
+                    <p class="mb-4">To provide you with the full functionality of Divvy, we collect:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Personal Info:</strong> Phone number, Name, and Email.</li>
+                        <li><strong>Financial Data:</strong> Expense details and settlement info. We <span class="text-primary font-semibold">never</span> store bank details or PINs.</li>
+                        <li><strong>Device Data:</strong> Optional contact access and anonymous performance logs.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">2. How We Use Your Information</h3>
+                    <p>We use your data for core functionality (calculating debts), user authentication, and app improvements. Your data is your own.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">3. Data Storage & Security</h3>
+                    <p>Your data is stored securely using <strong>Google Firebase</strong>. We use HTTPS/SSL encryption in transit and industry-standard encryption at rest.</p>
+                </div>
+
+                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border-l-4 border-primary">
+                    <p class="italic text-xs">For full details, deletion requests, or data access, contact us at <strong>support@boragetech.in</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-gray-200 dark:border-gray-800 text-center">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-gray-500 text-sm">© 2026 BorageTech. All rights reserved.</p>
+            <div class="mt-4 space-x-6 text-xs font-medium uppercase tracking-widest text-gray-400">
+                <a href="#" class="hover:text-primary transition-colors">Terms</a>
+                <a href="https://www.boragetech.in" class="hover:text-primary transition-colors">Website</a>
+                <a href="mailto:support@boragetech.in" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
