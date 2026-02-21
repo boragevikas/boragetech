@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BT SplitBill - BorageTech</title>
+    <meta name="description" content="BT SplitBill by BorageTech. The easiest way to split bills with friends.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: { sans: ['Inter', 'sans-serif'] },
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6', // Borage Blue
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        },
+                        accent: '#10b981', // Mint Green
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #3b82f6 0%, transparent 40%), radial-gradient(circle at bottom left, #10b981 0%, transparent 40%);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300" x-data="{ 
+          darkMode: localStorage.getItem('mode') === 'dark', 
+          mobileMenu: false,
+          toggle() {
+              this.darkMode = !this.darkMode;
+              localStorage.setItem('mode', this.darkMode ? 'dark' : 'light');
+              if (this.darkMode) {
+                  document.documentElement.classList.add('dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+              }
+          }
+      }" x-init="if (darkMode) document.documentElement.classList.add('dark');">
+
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full z-50 backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent rounded-xl flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/50 transition-all">
+                        <i class="fas fa-layer-group text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">Borage<span
+                            class="text-brand-600 dark:text-brand-400">Tech</span></span>
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#products" class="text-sm font-medium hover:text-brand-600 transition-colors">Our
+                    Apps</a>
+                <a href="index.html#about"
+                    class="text-sm font-medium hover:text-brand-600 transition-colors">Mission</a>
+                <a href="mailto:support@boragetech.in"
+                    class="text-sm font-medium hover:text-brand-600 transition-colors">Contact</a>
+
+                <button @click="toggle()"
+                    class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i x-show="!darkMode" class="fas fa-moon text-slate-600"></i>
+                    <i x-show="darkMode" x-cloak class="fas fa-sun text-yellow-400"></i>
+                </button>
+            </div>
+
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <div x-show="mobileMenu" x-collapse
+            class="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-4 space-y-4 shadow-xl">
+            <a href="index.html#products" class="block text-sm font-medium">Our Apps</a>
+            <a href="index.html#about" class="block text-sm font-medium">Mission</a>
+            <a href="mailto:support@boragetech.in" class="block text-sm font-medium">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 px-6 relative overflow-hidden min-h-screen">
+        <div class="absolute inset-0 hero-gradient opacity-10 dark:opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <div
+                class="w-20 h-20 bg-white dark:bg-slate-800 mx-auto rounded-3xl flex items-center justify-center text-4xl text-brand-600 mb-8 shadow-xl border border-slate-200 dark:border-slate-700">
+                <i class="fas fa-wallet"></i>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight leading-tight">
+                BT SplitBill
+            </h1>
+
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                The fairest way to split bills. Track shared expenses,
+                manage group debts, and settle up via WhatsApp without the awkward conversations.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-16">
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-brand-50 dark:bg-brand-900/50 rounded-xl flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 text-xl">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Group Management</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Easily add friends from your contacts and create
+                        groups for trips, roommates, or events.</p>
+                </div>
+
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-brand-50 dark:bg-brand-900/50 rounded-xl flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 text-xl">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Smart Reminders</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Send pre-filled settlement messages directly via
+                        WhatsApp to avoid awkward conversations.</p>
+                </div>
+
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-brand-50 dark:bg-brand-900/50 rounded-xl flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 text-xl">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Debt Simplification</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Our algorithm minimizes the number of transactions
+                        needed to settle all debts in a group.</p>
+                </div>
+
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-brand-50 dark:bg-brand-900/50 rounded-xl flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 text-xl">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Privacy Built-in</h3>
+                    <p class="text-slate-600 dark:text-slate-400">We don't sell your data. We only access the contacts
+                        you pick to quickly add members.</p>
+                    <a href="bt_splitbill_privacy.html"
+                        class="inline-block mt-4 text-brand-600 dark:text-brand-400 font-semibold hover:underline">Read
+                        BT SplitBill Privacy Policy &rarr;</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#"
+                    class="bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-lg">
+                    <i class="fab fa-google-play mr-2"></i> Download on Android
+                </a>
+                <a href="#"
+                    class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold hover:transform hover:scale-105 transition-all shadow-xl">
+                    <i class="fab fa-apple mr-2"></i> Download on iOS
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 py-16 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0">
+                <span class="text-xl font-bold tracking-tight">Borage<span class="text-brand-600">Tech</span></span>
+                <p class="text-sm text-slate-500 mt-2">© 2026 BorageTech. All rights reserved.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <a href="privacy_policy.html" class="hover:text-brand-600 transition-colors">BorageTech Privacy</a>
+                <a href="bt_splitbill_privacy.html" class="hover:text-brand-600 transition-colors">BT SplitBill
+                    Privacy</a>
+                <a href="mailto:support@boragetech.in" class="hover:text-brand-600 transition-colors">Support</a>
+                <a href="index.html" class="hover:text-brand-600 transition-colors">Home</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
