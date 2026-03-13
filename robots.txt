@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /favicon.ico
+Allow: /favicon.png
+Allow: /icons/
+
+Sitemap: https://boragetech.in/sitemap.xml
