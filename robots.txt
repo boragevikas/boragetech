@@ -5,3 +5,4 @@ Allow: /favicon.png
 Allow: /icons/
 
 Sitemap: https://boragetech.in/sitemap.xml
+Ads.txt: https://boragetech.in/ads.txt
