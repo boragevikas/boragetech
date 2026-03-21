@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Story of BT SplitBill | BorageTech Blog</title>
+    <meta name="description" content="Discover how BT SplitBill was built to solve the awkward problem of expense sharing with a privacy-first approach.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icons/logo.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: { sans: ['Inter', 'sans-serif'] },
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        },
+                        accent: '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #3b82f6 0%, transparent 40%), radial-gradient(circle at bottom left, #10b981 0%, transparent 40%);
+        }
+        .prose p { margin-bottom: 1.5rem; line-height: 1.8; color: inherit; opacity: 0.9; }
+        .prose h2 { font-size: 1.875rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; }
+        .prose h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .prose li { margin-bottom: 0.5rem; }
+        .tech-table th { text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; }
+        .dark .tech-table th { border-bottom-color: #334155; }
+        .tech-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+        .dark .tech-table td { border-bottom-color: #334155; }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6475220205205311" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300" x-data="{ 
+          darkMode: localStorage.getItem('mode') === 'dark', 
+          mobileMenu: false,
+          toggle() {
+              this.darkMode = !this.darkMode;
+              localStorage.setItem('mode', this.darkMode ? 'dark' : 'light');
+              if (this.darkMode) {
+                  document.documentElement.classList.add('dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+              }
+          }
+      }" x-init="if (darkMode) document.documentElement.classList.add('dark');">
+
+    <nav class="fixed w-full z-50 backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <img src="icons/logo.png" alt="BorageTech Logo" class="w-10 h-10 rounded-xl shadow-lg object-cover bg-black">
+                <span class="text-xl font-bold tracking-tight">Borage<span class="text-brand-600 dark:text-brand-400">Tech</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#products" class="text-sm font-medium hover:text-brand-600 transition-colors">Our Apps</a>
+                <a href="blog.html" class="text-sm font-medium hover:text-brand-600 transition-colors">Blog</a>
+                <a href="recommendations.html" class="text-sm font-medium hover:text-brand-600 transition-colors">Gear</a>
+                <a href="mailto:support@boragetech.in" class="text-sm font-medium hover:text-brand-600 transition-colors">Contact</a>
+
+                <button @click="toggle()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i x-show="!darkMode" class="fas fa-moon text-slate-600"></i>
+                    <i x-show="darkMode" x-cloak class="fas fa-sun text-yellow-400"></i>
+                </button>
+            </div>
+
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <div x-show="mobileMenu" x-collapse class="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-4 space-y-4 shadow-xl">
+            <a href="index.html#products" class="block text-sm font-medium">Our Apps</a>
+            <a href="blog.html" class="block text-sm font-medium">Blog</a>
+            <a href="recommendations.html" class="block text-sm font-medium">Gear</a>
+            <a href="mailto:support@boragetech.in" class="block text-sm font-medium">Contact</a>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-20 px-6 relative">
+        <div class="absolute inset-0 hero-gradient opacity-10 dark:opacity-20 pointer-events-none fixed"></div>
+
+        <article class="max-w-4xl mx-auto z-10 relative">
+            <div class="mb-12 text-center">
+                <div class="inline-flex items-center space-x-2 bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8 border border-brand-100 dark:border-brand-800">
+                    BorageTech Products
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+                    The Story of BT SplitBill: Building Privacy-First <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent">Digital Courage.</span>
+                </h1>
+                <div class="flex items-center justify-center space-x-6 text-sm text-slate-500 mb-12">
+                    <span class="flex items-center"><i class="far fa-user mr-2 text-brand-600"></i> Vikas Borage</span>
+                    <span class="flex items-center"><i class="far fa-calendar mr-2 text-brand-600"></i> March 21, 2026</span>
+                    <span class="flex items-center"><i class="far fa-clock mr-2 text-brand-600"></i> 7 min read</span>
+                </div>
+            </div>
+
+            <div class="rounded-3xl overflow-hidden shadow-2xl mb-16 border border-slate-200 dark:border-slate-700">
+                <img src="/blog_images/bt_splitbill_blog_header_1774073519202.png" alt="BT SplitBill Story" class="w-full object-cover">
+            </div>
+
+            <div class="prose max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-300">
+                <h2>1. The Concept: "Minimalist Utility"</h2>
+                <p>
+                    The core philosophy of <strong>BT-SplitBill</strong> is to remove the "friction" from shared finances.
+                </p>
+                <p><strong>The Problem:</strong> Most expense-splitting apps are bloated with social features, intrusive ads, or complex onboarding that confuses casual users.</p>
+                <p><strong>The Solution:</strong> A high-speed, logic-driven utility that does one thing perfectly: calculates who owes what. It’s built for users who want to log an expense in 5 seconds and get back to their lives.</p>
+
+                <h2>2. Core Functionalities (The "What")</h2>
+                <p>We've designed BT SplitBill around real-world scenarios. Here’s how it empowers you:</p>
+                <ul>
+                    <li><strong>Seamless Group Management:</strong> Create groups for roommates, trips, or dinners. Members are added via a simple link or invite, keeping the entry barrier low.</li>
+                    <li><strong>Intelligent Expense Logging:</strong> Add expenses, specify who paid, and choose between equal or custom splits. The app handles the math instantly.</li>
+                    <li><strong>Real-Time "Settle Up" Dashboard:</strong> A clear, transparent view of balances. It answers the question "Who do I owe?" without needing to scroll through weeks of history.</li>
+                    <li><strong>Cross-Platform Sync:</strong> Because it’s built on Flutter, the experience is identical whether you are on the Android App or using the Web App at <a href="https://splitbill.boragetech.in/" target="_blank">splitbill.boragetech.in</a>.</li>
+                    <li><strong>Instant Notifications:</strong> Using Firebase Cloud Messaging (FCM), users get notified the moment they are added to a group or a new bill is logged, ensuring no one is left in the dark.</li>
+                </ul>
+
+                <h2>3. The Technical Stack (The "How")</h2>
+                <p>For the fellow developers out there, here is a look at the modern stack powering this experience:</p>
+                
+                <div class="overflow-x-auto my-8">
+                    <table class="tech-table w-full text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 dark:bg-slate-800">
+                                <th>Component</th>
+                                <th>Technology</th>
+                                <th>Benefit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold">Frontend</td>
+                                <td>Flutter</td>
+                                <td>Single codebase for Android and Web; high-performance UI.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Database</td>
+                                <td>Cloud Firestore</td>
+                                <td>NoSQL real-time syncing across all devices.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Authentication</td>
+                                <td>Firebase Auth</td>
+                                <td>Secure, one-tap login for user privacy.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Hosting</td>
+                                <td>Firebase Hosting</td>
+                                <td>Fast global delivery for the web platform.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Monetization</td>
+                                <td>AdMob / AdSense</td>
+                                <td>A "Zero Cost" model for the developer and user.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>4. Design Philosophy: The BorageTech Edge</h2>
+                <p>Why does BT-SplitBill feel different? It’s intentional:</p>
+                <ul>
+                    <li><strong>Minimalist UI:</strong> No unnecessary animations or "extra" buttons. Every pixel has a purpose.</li>
+                    <li><strong>Privacy-First:</strong> Unlike many free tools, BT-SplitBill is built by a developer who values data privacy. No unauthorized tracking or data selling.</li>
+                    <li><strong>Offline-Ready:</strong> Basic functionality remains snappy even on slower networks, thanks to Flutter’s local caching and Firestore's offline capabilities.</li>
+                </ul>
+
+                <h2>5. Deployment & Sustainability</h2>
+                <p><strong>The "Zero-Cost" Architecture:</strong> We've leveraged Google’s Cloud Infrastructure and AdMob to keep the app free for everyone forever. This ensures long-term sustainability without charging users a subscription.</p>
+                <p><strong>Future Roadmap:</strong> We're not stopping here. Upcoming features include PDF report generation for business trips and deep integration with other BorageTech utility tools.</p>
+
+                <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-700">
+                    <h3 class="text-center mb-8">Ready to split the bill?</h3>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="https://play.google.com/store/apps/details?id=in.boragetech.btsplitbill" target="_blank"
+                            rel="noopener noreferrer"
+                            class="bg-brand-600 text-white px-8 py-4 rounded-xl font-bold flex justify-center items-center hover:bg-brand-700 transition-colors shadow-lg">
+                            <i class="fab fa-google-play text-xl mr-3"></i> Download on Android
+                        </a>
+                        <a href="https://splitbill.boragetech.in/" target="_blank" rel="noopener noreferrer"
+                            class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold flex justify-center items-center hover:transform hover:scale-105 transition-all shadow-xl">
+                            <i class="fas fa-globe text-xl mr-3"></i> Try it on Web
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-12 border-t border-slate-200 dark:border-slate-700">
+                    <h3 class="mb-6">Share this story</h3>
+                    <div class="flex space-x-4">
+                        <button class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-600 hover:text-white transition-all"><i class="fab fa-twitter"></i></button>
+                        <button class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-600 hover:text-white transition-all"><i class="fab fa-linkedin"></i></button>
+                        <button class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-600 hover:text-white transition-all"><i class="fab fa-whatsapp"></i></button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white dark:bg-slate-900 py-16 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0">
+                <div class="flex items-center space-x-3 mb-2">
+                    <img src="icons/logo.png" alt="BorageTech Logo" class="w-8 h-8 rounded-lg shadow-sm object-cover bg-black">
+                    <span class="text-xl font-bold tracking-tight">Borage<span class="text-brand-600">Tech</span></span>
+                </div>
+                <p class="text-sm text-slate-500 mt-2">© 2026 BorageTech. All rights reserved.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <a href="privacy_policy.html" class="hover:text-brand-600 transition-colors">Privacy Policy</a>
+                <a href="blog.html" class="hover:text-brand-600 transition-colors">Blog</a>
+                <a href="mailto:support@boragetech.in" class="hover:text-brand-600 transition-colors">Support</a>
+                <a href="index.html" class="hover:text-brand-600 transition-colors">Home</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
