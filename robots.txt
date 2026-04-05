@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
-Allow: /favicon.ico
-Allow: /favicon.png
-Allow: /icons/
+
+# Specifically allow the AdMob crawler
+User-agent: Google-adstxt
+Allow: /app-ads.txt
 
 Sitemap: https://boragetech.in/sitemap.xml
-Ads.txt: https://boragetech.in/ads.txt
